@@ -1,11 +1,16 @@
 package com.oneler.supervr.web;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import okhttp3.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * /**
@@ -116,7 +121,12 @@ public class SellerController {
         return str.toString();
     }
 
-    @GetMapping(value = "s")
+    @GetMapping("/hello")
+    public String hello() {
+        return "helloWorld";
+    }
+
+    @GetMapping(value = "/s")
     public String result(String cookie) throws IOException {
         String result = null;
         while (true) {
@@ -129,6 +139,20 @@ public class SellerController {
                         result = "程序结束了!";
                         break;
                     }
+                } else {
+                   /* Runnable runnable = () -> {
+                        try {
+                            run("https://www.supervr.co/v2_nav_MemberTradingHall.ph?v=" + Math.random(), cookie);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    };
+                    ScheduledExecutorService service = Executors
+                            .newSingleThreadScheduledExecutor();
+                    // 第二个参数为首次执行的延时时间，第三个参数为定时执行的间隔时间
+                    service.scheduleAtFixedRate(runnable, 10, 60, TimeUnit.SECONDS);*/
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -138,4 +162,7 @@ public class SellerController {
         }
         return result;
     }
+
+
 }
+
