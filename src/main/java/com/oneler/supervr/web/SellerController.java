@@ -106,12 +106,7 @@ public class SellerController {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
-                if (result.contains("fb:ok") || result.contains("fb:le_stock_for_sale")) {
-                    flag = true;
-                }
-                if (flag) {
-                    call.cancel();
-                }
+
                 str.append(response.body().string());
 
             }
@@ -135,10 +130,6 @@ public class SellerController {
                 if (LocalDateTime.now().isAfter(d1)) {
                     result = run("https://www.supervr.co/v2_nav_MemberTradingHall.ph?v=" + Math.random(), cookie);
                     Thread.sleep(50);
-                    if (flag) {
-                        result = "程序结束了!";
-                        break;
-                    }
                 } else {
                    /* Runnable runnable = () -> {
                         try {
@@ -160,7 +151,7 @@ public class SellerController {
                 e.printStackTrace();
             }
         }
-        return result;
+
     }
 
 
