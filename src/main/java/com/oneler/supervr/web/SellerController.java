@@ -1,16 +1,11 @@
 package com.oneler.supervr.web;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import okhttp3.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  * /**
@@ -86,7 +81,7 @@ public class SellerController {
 
         RequestBody body = new FormBody.Builder()
                 .add("t", "flagDRStock")
-                .add("password", "315840")
+                .add("password", "315849")
                 .add("sell_number", "1000")
                 .build();
 
@@ -106,9 +101,6 @@ public class SellerController {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
-
-                str.append(response.body().string());
-
             }
         });
 
@@ -122,38 +114,26 @@ public class SellerController {
     }
 
     @GetMapping(value = "/s")
-    public String result(String cookie) throws IOException {
-        String result = null;
+    public void result(String cookie) throws IOException, InterruptedException {
         while (true) {
             try {
-                final LocalDateTime d1 = LocalDateTime.parse("2017-10-29T08:59:59");
-                if (LocalDateTime.now().isAfter(d1)) {
-                    result = run("https://www.supervr.co/v2_nav_MemberTradingHall.ph?v=" + Math.random(), cookie);
-                    Thread.sleep(50);
-                } else {
-                   /* Runnable runnable = () -> {
-                        try {
-                            run("https://www.supervr.co/v2_nav_MemberTradingHall.ph?v=" + Math.random(), cookie);
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                    };
-                    ScheduledExecutorService service = Executors
-                            .newSingleThreadScheduledExecutor();
-                    // 第二个参数为首次执行的延时时间，第三个参数为定时执行的间隔时间
-                    service.scheduleAtFixedRate(runnable, 10, 60, TimeUnit.SECONDS);*/
+                final LocalDateTime d1 = LocalDateTime.parse("2017-11-01T08:59:59");
+                if (true) {
+                    run("https://www.supervr.co/v2_nav_MemberTradingHall.ph?v=" + Math.random(), cookie);
+                    break;
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
+        while (true) {
+            for (int i = 0; i < 5; i++) {
+                run("https://www.supervr.co/v2_nav_MemberTradingHall.ph?v=" + Math.random(), cookie);
+                Thread.sleep(200);
+            }
+            break;
+        }
     }
-
 
 }
 
