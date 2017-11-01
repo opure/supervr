@@ -118,7 +118,7 @@ public class SellerController {
         while (true) {
             try {
                 final LocalDateTime d1 = LocalDateTime.parse("2017-11-01T08:59:59");
-                if (true) {
+                if (LocalDateTime.now().isAfter(d1)) {
                     run("https://www.supervr.co/v2_nav_MemberTradingHall.ph?v=" + Math.random(), cookie);
                     break;
                 }
