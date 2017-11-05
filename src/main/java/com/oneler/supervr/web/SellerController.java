@@ -117,7 +117,7 @@ public class SellerController {
     public void result(String cookie) throws IOException, InterruptedException {
         while (true) {
             try {
-                final LocalDateTime d1 = LocalDateTime.parse("2017-11-01T08:59:59");
+                final LocalDateTime d1 = LocalDateTime.parse("2017-11-05T08:59:59");
                 if (LocalDateTime.now().isAfter(d1)) {
                     run("https://www.supervr.co/v2_nav_MemberTradingHall.ph?v=" + Math.random(), cookie);
                     break;
